@@ -8,4 +8,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  resources :calculators do
+    collection do
+      get "add"
+    end
+  end
 end
