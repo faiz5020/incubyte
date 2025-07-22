@@ -39,6 +39,13 @@ RSpec.describe CalculatorsController, type: :controller do
     let(:string_input11) {{ "input_string": "\n \n \n5\n6"}}
     let(:string_input12) {{ "input_string": "\n1 \n.5 \n.5\n3"}}
 
+    let(:delimiter_input1) {{ "input_string": "//;\n1;2"}}
+    let(:delimiter_input2) {{ "input_string": "//|\n1|2|3|4"}}
+    let(:delimiter_input3) {{ "input_string": "//jul\n1jul2jul4jul4"}}
+    let(:delimiter_input4) {{ "input_string": "//$\n1$2$3"}}
+    let(:delimiter_input5) {{ "input_string": "//.\n1.2.3.4"}}
+    let(:delimiter_input6) {{ "input_string": "//7\n17273" }}
+
 
 
     context 'with empty string input' do
@@ -310,6 +317,54 @@ RSpec.describe CalculatorsController, type: :controller do
       it 'should return 5' do
         json = JSON.parse(response.body)
         expect(json).to eq(5)
+      end
+    end
+
+    context 'with delimiter input 1' do
+      before { get :add, params: delimiter_input1 }
+      it 'should return 3' do
+        json = JSON.parse(response.body)
+        expect(json).to eq(3)
+      end
+    end
+
+    context 'with delimiter input 2' do
+      before { get :add, params: delimiter_input2 }
+      it 'should return 10' do
+        json = JSON.parse(response.body)
+        expect(json).to eq(10)
+      end
+    end
+
+    context 'with delimiter input 3' do
+      before { get :add, params: delimiter_input3 }
+      it 'should return 11' do
+        json = JSON.parse(response.body)
+        expect(json).to eq(11)
+      end
+    end
+
+    context 'with delimiter input 4' do
+      before { get :add, params: delimiter_input4 }
+      it 'should return 6' do
+        json = JSON.parse(response.body)
+        expect(json).to eq(6)
+      end
+    end
+
+    context 'with delimiter input 5' do
+      before { get :add, params: delimiter_input5 }
+      it 'should return 10' do
+        json = JSON.parse(response.body)
+        expect(json).to eq(10)
+      end
+    end
+
+    context 'with delimiter input 6' do
+      before { get :add, params: delimiter_input6 }
+      it 'should return 6' do
+        json = JSON.parse(response.body)
+        expect(json).to eq(6)
       end
     end
   end

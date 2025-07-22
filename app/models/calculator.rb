@@ -5,6 +5,10 @@ class Calculator < ApplicationRecord
       return 0
     else
       if input_string.first(2) == "//"
+        index_of_new_line_ch = input_string.index("\n")
+        delimiter = input_string[2...index_of_new_line_ch]
+        input_string.slice! input_string[0..index_of_new_line_ch]
+        calculate_sum(input_string.split("#{delimiter}").join(","))
       elsif input_string.include?("\n")
         string_w_new_line = input_string.split("\n").join(",")
         calculate_sum(string_w_new_line)
